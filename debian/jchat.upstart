@@ -1,0 +1,21 @@
+# Upstart Configuration
+
+description     "JChat"
+author          "Jack Christensen"
+
+start on (net-device-up
+          and local-filesystems
+          and runlevel [2345])
+
+stop on runlevel [016]
+
+respawn
+respawn limit 10 600
+# post-stop should keep jchat from respawning a bunch of times on boot before
+# PostgreSQL is totally up and failing to stay up on boot
+post-stop exec sleep 10
+
+setuid jchat
+setgid nogroup
+
+exec /usr/bin/jchat server --config /etc/jchat/jchat.conf
