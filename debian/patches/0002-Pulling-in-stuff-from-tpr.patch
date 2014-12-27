@@ -1,0 +1,97 @@
+From: Jack Christensen <jack@jackchristensen.com>
+Date: Sat, 27 Dec 2014 15:51:11 -0600
+Subject: Pulling in stuff from tpr
+
+---
+ conf/jchat.conf | 20 ++++++++++++++++++++
+ conf/tern.conf  |  6 ++++++
+ man/jchat.md    | 40 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 66 insertions(+)
+ create mode 100644 conf/jchat.conf
+ create mode 100644 conf/tern.conf
+ create mode 100644 man/jchat.md
+
+diff --git a/conf/jchat.conf b/conf/jchat.conf
+new file mode 100644
+index 0000000..0457d14
+--- /dev/null
++++ b/conf/jchat.conf
+@@ -0,0 +1,20 @@
++[server]
++address = 127.0.0.1
++port = 4001
++
++[database]
++host = /var/run/postgresql
++database = jchat
++# user = jchat
++# password = secret
++
++[mail]
++# root_url = http://localhost:4000
++# smtp_server = smtp.example.com
++# username = you@example.com
++# password = secret
++# from_address = you@example.com
++
++[log]
++level = info
++pgx_level = error
+diff --git a/conf/tern.conf b/conf/tern.conf
+new file mode 100644
+index 0000000..e9e5003
+--- /dev/null
++++ b/conf/tern.conf
+@@ -0,0 +1,6 @@
++[database]
++host = /var/run/postgresql
++database = jchat
++
++[data]
++app_user = jchat
+diff --git a/man/jchat.md b/man/jchat.md
+new file mode 100644
+index 0000000..714db4c
+--- /dev/null
++++ b/man/jchat.md
+@@ -0,0 +1,40 @@
++TPR 1 "May 2014" "tpr <%= VERSION %>" "TPR Manual"
++==================================================
++
++NAME
++----
++
++tpr - The Pithy Reader
++
++SYNOPSIS
++--------
++
++`tpr` [option]...
++
++DESCRIPTION
++-----------
++
++`tpr` is an RSS aggregator.
++
++OPTIONS
++-------
++
++`-address` *ip-address*
++  Address to listen on (default: 127.0.0.1).
++
++`-config` *config-file*
++  Path to config file (default: config.yml).
++
++`-port` *port-number*
++  Port number (default: 8080).
++
++`-static-url` *url*
++  Reverse proxy static asset requests to URL
++
++`-version`
++  Print version and exit
++
++AUTHOR
++------
++
++Jack Christensen <jack@jackchristensen.com>
