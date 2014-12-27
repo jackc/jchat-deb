@@ -1,0 +1,49 @@
+From: Jack Christensen <jack@jackchristensen.com>
+Date: Sat, 27 Dec 2014 15:11:15 -0600
+Subject: Add Makefile for install
+
+---
+ Makefile | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+ create mode 100644 Makefile
+
+diff --git a/Makefile b/Makefile
+new file mode 100644
+index 0000000..442b421
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,34 @@
++BIN     = $(DESTDIR)/usr/bin
++SHARE   = $(DESTDIR)/usr/share/jchat
++ETC     = $(DESTDIR)/etc/jchat
++
++build/jchat:
++	ln -s $(CURDIR) $(CURDIR)/backend/Godeps/_workspace/src/github.com/jackc/jchat
++	cd backend; GOPATH=$(CURDIR)/backend/Godeps/_workspace go build -o ../build/jchat
++	rm $(CURDIR)/backend/Godeps/_workspace/src/github.com/jackc/jchat
++
++build/assets:
++	cd frontend; bundle exec middleman build
++
++build/jchat.1: man/jchat.md
++	md2man-roff man/jchat.md > build/jchat.1
++
++install: build/jchat build/assets build/jchat.1
++	install -d $(BIN)
++	install build/jchat $(BIN)
++
++	cd build/assets; find . -type d -exec install -d $(SHARE)/assets/{} \;
++	cd build/assets; find . -type f -exec install -m 644 {} $(SHARE)/assets/{} \;
++
++	cd migrate; find . -type d -exec install -d $(SHARE)/migrate/{} \;
++	cd migrate; find . -type f -exec install -m 644 {} $(SHARE)/migrate/{} \;
++
++	install -d $(ETC)
++	install -m 640 conf/jchat.conf $(ETC)
++	install -m 640 conf/tern.conf $(ETC)
++
++
++clean:
++	rm -rf build
++	rm -rf frontend/.cache
++	rm -f $(CURDIR)/backend/Godeps/_workspace/src/github.com/jackc/jchat
