@@ -1,5 +1,5 @@
-jchat (0.0.1-1) unstable; urgency=low
+jchat (0.0.1-1) trusty; urgency=low
 
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+  * Initial release
 
  -- Jack Christensen <jack@jackchristensen.com>  Sat, 27 Dec 2014 15:03:02 -0600

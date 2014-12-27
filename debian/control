@@ -1,15 +1,16 @@
 Source: jchat
-Section: unknown
+Section: web
 Priority: optional
 Maintainer: Jack Christensen <jack@jackchristensen.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: git://git.debian.org/collab-maint/jchat.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/jchat.git;a=summary
+Homepage: https://github.com/jackc/jchat
+Vcs-Git: https://github.com/jackc/jchat.git
+Vcs-Browser: https://github.com/jackc/jchat
 
 Package: jchat
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends: ${shlibs:Depends}, ${misc:Depends}, adduser
+Recommends: tern (>= 1.2.0), postgresql
+Description: JChat
+ Simple web chat
